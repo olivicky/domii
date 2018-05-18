@@ -246,11 +246,12 @@ module.exports = function(controller) {
                             var setPoint = parseInt(response.set_point);
                             var statusTermostato = response.status;
                             if(temperature > 0 && modalita && setPoint > 0 && statusTermostato){
-                                console.log("Entrato nell'if per mostrare info termostato");
+                                
                                 convo.setVar('readedtemperature',temperature);
                                 convo.setVar('readedmodalita',modalita);
                                 convo.setVar('readedsetPoint',setPoint);
                                 convo.setVar('readedstatusTermostato',statusTermostato);
+                                console.log("temperatura:" + temperature + " modalita:" + modalita + " setPoint:" + setPoint + " statusTermostato:"+ statusTermostato);
                                 convo.gotoThread('info_temperatura_termostato');
                             }
                             convo.gotoThread('scelta_comando_termostato');
