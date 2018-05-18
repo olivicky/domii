@@ -254,7 +254,7 @@ module.exports = function(controller) {
                                 console.log("temperatura:" + temperature + " modalita:" + modalita + " setPoint:" + setPoint + " statusTermostato:"+ statusTermostato);
                                 convo.gotoThread('info_temperatura_termostato');
                             }
-                            convo.gotoThread('scelta_comando_termostato');
+                            //convo.gotoThread('scelta_comando_termostato');
                           }
                             //askOperation(response, convo);
                             //convo.next();
