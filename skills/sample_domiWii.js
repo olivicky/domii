@@ -242,9 +242,9 @@ module.exports = function(controller) {
                             console.log("Entrato nell'if di dispositivo termostato");
                             convo.setVar('dispositivo','Termostato');
                             var temperature = parseInt(response.temperature);
-                            var modalita = response.modalita;
-                            var setPoint = parseInt(response.setPoint);
-                            var statusTermostato = response.statusTermostato;
+                            var modalita = response.mode;
+                            var setPoint = parseInt(response.set_point);
+                            var statusTermostato = response.status;
                             if(temperature > 0 && modalita && setPoint > 0 && statusTermostato){
                                 convo.setVar('readedtemperature',temperature);
                                 convo.setVar('readedmodalita',modalita);
