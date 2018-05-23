@@ -242,7 +242,29 @@ module.exports = function(controller) {
                             console.log("Entrato nell'if di dispositivo termostato");
                             convo.setVar('dispositivo','Termostato');
                             var temperature = parseInt(response.temperature);
-                            var modalita = response.mode;
+                            var modalita;
+                            var statusTermostato;
+                              var onOFF;
+                             switch(response.mode){
+                                 case WINTER: modalita = "Inverno"; break;
+                                 case SUMMER: modalita = "Estate"; break;
+                                 default: modalita = "Inverno"; break;
+                             }
+                             switch(response.status){
+                                 case "MANUAL": statusTermostato = "MANUALE"; break;
+                                 case "ANTIFORNO": statusTermostato = "PROTEZIONE"; break;
+                                 case "ANTIGELO": statusTermostato = "PROTEZIONE"; break;
+                                 case "AUTOMATICO": statusTermostato = "PROGRAMMA"; break;
+                                 case "SPENTO": statusTermostato = "SPENTO"; break;
+                                 default: statusTermostato = "AUTOMATICO"; break;
+                             }
+                             if(statusTermostato == "SPENTO"){
+                                onOFF = "SPENTO";
+                             }
+                             else{
+                                onOFF = "ACCESO";
+                             }
+                              
                             var setPoint = parseInt(response.set_point);
                             var statusTermostato = response.status;
                             if(temperature > 0 && modalita && setPoint > 0 && statusTermostato){
@@ -251,6 +273,7 @@ module.exports = function(controller) {
                                 convo.setVar('readedmodalita',modalita);
                                 convo.setVar('readedsetPoint',setPoint);
                                 convo.setVar('readedstatusTermostato',statusTermostato);
+                                convo.setVar('onOFF', onOFF);
                                 console.log("temperatura:" + temperature + " modalita:" + modalita + " setPoint:" + setPoint + " statusTermostato:"+ statusTermostato);
                                 convo.gotoThread('info_temperatura_termostato');
                             }
