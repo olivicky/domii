@@ -158,10 +158,22 @@ module.exports = function(controller) {
     controller.studio.validate('domiWii','comando_termostato', function(convo, next) {
 
         var value = convo.extractResponse('comando_termostato');
+        var command = value.toUpperCase();
 
-        // test or validate value somehow
+            if(command == "M" || command == "1" || command == "MANUALE"){
+              command = "MANUALE";
+            }
+            else if(command == "P" || command == "3" || command == "PROTEZIONE"){
+              command = "PROTEZIONE";
+            }
+            else if(command == "A" || command == "2" || command == "PROGRAMMA"){
+              command = "AUTOMATICO";
+            }
+            else if(command == "S" || command == "4" || command == "SPEGNI"){
+              command = "SPEGNI";
+            }
         // can call convo.gotoThread() to change direction of conversation
-        convo.setVar('comando_termostato',value);
+        convo.setVar('comando_termostato', command);
 
         console.log('VALIDATE: domiWii VARIABLE: comando_termostato');
 
@@ -475,18 +487,18 @@ module.exports = function(controller) {
           var mode;
  
 
-            if(command == "M" || command == "1"){
-              command = "MANUALE";
-            }
-            else if(command == "P" || command == "3"){
-              command = "PROTEZIONE";
-            }
-            else if(command == "A" || command == "2"){
-              command = "AUTOMATICO";
-            }
-            else if(command == "S" || command == "4"){
-              command = "SPEGNI";
-            }
+//             if(command == "M" || command == "1"){
+//               command = "MANUALE";
+//             }
+//             else if(command == "P" || command == "3"){
+//               command = "PROTEZIONE";
+//             }
+//             else if(command == "A" || command == "2"){
+//               command = "AUTOMATICO";
+//             }
+//             else if(command == "S" || command == "4"){
+//               command = "SPEGNI";
+//             }
           
           if(modality == "I"){
               modality = "INVERNO";
