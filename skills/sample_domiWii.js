@@ -266,7 +266,7 @@ module.exports = function(controller) {
                              }
                               
                             var setPoint = parseInt(response.set_point);
-                            var statusTermostato = response.status;
+                            
                             if(temperature > 0 && modalita && statusTermostato){
                                 
                                 convo.setVar('readedtemperature',temperature);
