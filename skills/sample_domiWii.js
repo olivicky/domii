@@ -475,16 +475,16 @@ module.exports = function(controller) {
           var mode;
  
 
-            if(command == "M"){
+            if(command == "M" || command == "1"){
               command = "MANUALE";
             }
-            else if(command == "P"){
+            else if(command == "P" || command == "3"){
               command = "PROTEZIONE";
             }
-            else if(command == "A"){
+            else if(command == "A" || command == "2"){
               command = "AUTOMATICO";
             }
-            else if(command == "S"){
+            else if(command == "S" || command == "4"){
               command = "SPEGNI";
             }
           
