@@ -246,8 +246,8 @@ module.exports = function(controller) {
                             var statusTermostato;
                               var onOFF;
                              switch(response.mode){
-                                 case WINTER: modalita = "Inverno"; break;
-                                 case SUMMER: modalita = "Estate"; break;
+                                 case "WINTER": modalita = "Inverno"; break;
+                                 case "SUMMER": modalita = "Estate"; break;
                                  default: modalita = "Inverno"; break;
                              }
                              switch(response.status){
@@ -255,7 +255,7 @@ module.exports = function(controller) {
                                  case "ANTIFORNO": statusTermostato = "PROTEZIONE"; break;
                                  case "ANTIGELO": statusTermostato = "PROTEZIONE"; break;
                                  case "AUTOMATICO": statusTermostato = "PROGRAMMA"; break;
-                                 case "SPENTO": statusTermostato = "SPENTO"; break;
+                                 case "OFF": statusTermostato = "SPENTO"; break;
                                  default: statusTermostato = "AUTOMATICO"; break;
                              }
                              if(statusTermostato == "SPENTO"){
