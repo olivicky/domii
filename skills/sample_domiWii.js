@@ -167,7 +167,7 @@ module.exports = function(controller) {
               command = "PROTEZIONE";
             }
             else if(command == "A" || command == "2" || command == "PROGRAMMA"){
-              command = "AUTOMATICO";
+              command = "PROGRAMMA";
             }
             else if(command == "S" || command == "4" || command == "SPEGNI"){
               command = "SPEGNI";
@@ -266,9 +266,9 @@ module.exports = function(controller) {
                                  case "MANUAL": statusTermostato = "MANUALE"; break;
                                  case "ANTIFORNO": statusTermostato = "PROTEZIONE"; break;
                                  case "ANTIGELO": statusTermostato = "PROTEZIONE"; break;
-                                 case "AUTOMATICO": statusTermostato = "PROGRAMMA"; break;
+                                 case "AUTO": statusTermostato = "PROGRAMMA"; break;
                                  case "OFF": statusTermostato = "SPENTO"; break;
-                                 default: statusTermostato = "AUTOMATICO"; break;
+                                 default: statusTermostato = "AUTO"; break;
                              }
                              if(statusTermostato == "SPENTO"){
                                 onOFF = "SPENTO";
@@ -510,7 +510,7 @@ module.exports = function(controller) {
 
 
             switch (command) {
-              case "AUTOMATICO":
+              case "PROGRAMMA":
                   modalità = "3";
                   break;
               case "SPEGNI":
