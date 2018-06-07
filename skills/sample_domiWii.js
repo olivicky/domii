@@ -493,9 +493,11 @@ module.exports = function(controller) {
             var timer = convo.extractResponse('timer_on');
             var modality = convo.extractResponse('modalita_termostato');
             modality = modality.toUpperCase();
-            var modalità;
+            var modalita;
           var mode;
  
+            console.log("command variable: "+ command);
+            console.log("modality variable: "+ modality)
 
 //             if(command == "M" || command == "1"){
 //               command = "MANUALE";
@@ -516,17 +518,19 @@ module.exports = function(controller) {
 
             switch (command) {
               case "PROGRAMMA":
-                  modalità = "3";
+                  modalita = "3";
                   break;
               case "SPEGNI":
-                  modalità = "2";
+                  modalita = "2";
                   break;
               case "PROTEZIONE":
-                  modalità = "7";
+                  modalita = "7";
                   break;
               case "MANUALE":
-                  modalità = "1";
+                  modalita = "1";
                   break;
+                default:
+                    modalita = "1";
               
             }
           
@@ -537,14 +541,15 @@ module.exports = function(controller) {
               case "INVERNO":
                   mode = "0";
                   break;
-              
+              default:
+                  mode= "0"
             }
 
           var object = {};
           
           object.alias = alias;
           object.password = password;
-          object.command = modalità;
+          object.command = modalita;
           object.uiid = uiid;
           (timer)? object.timeOn = timer : null;
           (temperatura)? object.temperature = temperatura : null;
