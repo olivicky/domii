@@ -110,6 +110,13 @@ module.exports = function(controller) {
     controller.studio.validate('domiWii','modalita_termostato', function(convo, next) {
 
         var value = convo.extractResponse('modalita_termostato');
+        
+        if(value == "I" || value=="i"){
+           value = "INVERNO";
+        }
+        else if(value == "E" || value =="e"){
+          value = "ESTATE";
+        }
 
         // test or validate value somehow
         // can call convo.gotoThread() to change direction of conversation
@@ -256,7 +263,7 @@ module.exports = function(controller) {
                             var temperature = parseInt(response.temperature);
                             var modalita;
                             var statusTermostato;
-                              var onOFF;
+                            var onOFF;
                              switch(response.mode){
                                  case "WINTER": modalita = "Inverno"; break;
                                  case "SUMMER": modalita = "Estate"; break;
@@ -278,6 +285,9 @@ module.exports = function(controller) {
                              }
                               
                             var setPoint = parseInt(response.set_point);
+                            if(setPoint === 0){
+                                setPoint = "NESSUNO";
+                            }
                             
                             if(temperature > 0 && modalita && statusTermostato){
                                 
@@ -500,12 +510,7 @@ module.exports = function(controller) {
 //               command = "SPEGNI";
 //             }
           
-          if(modality == "I"){
-              modality = "INVERNO";
-            }
-            else if(modality == "E"){
-              modality = "ESTATE";
-            }
+          
             
 
 
