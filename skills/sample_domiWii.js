@@ -299,10 +299,11 @@ module.exports = function(controller) {
                                 convo.gotoThread('info_temperatura_termostato');
                             }
                             //convo.gotoThread('scelta_comando_termostato');
-                          }
+                          } else {
                             //askOperation(response, convo);
                             //convo.next();
-                            
+							convo.gotoThread('bad_device');
+                            }
                             next();
                         }
                         else{
