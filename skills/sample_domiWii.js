@@ -264,7 +264,7 @@ module.exports = function(controller) {
                             var modalita;
                             var statusTermostato;
                             var onOFF;
-                             switch(response.mode){
+                             switch(response.running_mode){
                                  case "WINTER": modalita = "Inverno"; break;
                                  case "SUMMER": modalita = "Estate"; break;
                                  default: modalita = "Inverno"; break;
@@ -277,11 +277,10 @@ module.exports = function(controller) {
                                  case "OFF": statusTermostato = "SPENTO"; break;
                                  default: statusTermostato = "AUTO"; break;
                              }
-                             if(statusTermostato == "SPENTO"){
-                                onOFF = "SPENTO";
-                             }
-                             else{
-                                onOFF = "ACCESO";
+                             switch(response.is_running){
+                                 case "OFF": onOFF = "SPENTO"; break;
+                                 case "ON": onOFF = "ACCESO"; break;
+                                 default: onOFF = "SPENTO"; break;
                              }
                               
                             var setPoint = parseInt(response.set_point);
