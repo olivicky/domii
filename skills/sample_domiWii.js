@@ -167,16 +167,16 @@ module.exports = function(controller) {
         var value = convo.extractResponse('comando_termostato');
         var command = value.toUpperCase();
 
-            if(command == "M" || command == "1" || command == "MANUALE"){
+            if(command == "M" || command == 1 || command == "MANUALE"){
               command = "MANUALE";
             }
-            else if(command == "P" || command == "3" || command == "PROTEZIONE"){
+            else if(command == "P" || command == 3 || command == "PROTEZIONE"){
               command = "PROTEZIONE";
             }
-            else if(command == "A" || command == "2" || command == "PROGRAMMA"){
+            else if(command == "A" || command == 2 || command == "PROGRAMMA"){
               command = "PROGRAMMA";
             }
-            else if(command == "S" || command == "4" || command == "SPEGNI"){
+            else if(command == "S" || command == 4 || command == "SPEGNI"){
               command = "SPEGNI";
             }
         // can call convo.gotoThread() to change direction of conversation
