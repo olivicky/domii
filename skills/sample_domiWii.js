@@ -498,6 +498,27 @@ module.exports = function(controller) {
  
             console.log("command variable: "+ command);
             console.log("modality variable: "+ modality)
+		
+		if(command === "M" || command === "1" || command === "MANUALE"){
+              command = "MANUALE";
+            }
+            else if(command === "P" || command === "3" || command === "PROTEZIONE"){
+              command = "PROTEZIONE";
+            }
+            else if(command === "A" || command === "2" || command === "PROGRAMMA"){
+              command = "PROGRAMMA";
+            }
+            else if(command === "S" || command === "4" || command === "SPEGNI"){
+              command = "SPEGNI";
+            }
+		
+	    if(modality == "I" || modality=="INVERNO"){
+		modality = "INVERNO";
+	    }
+            else if(modality == "E" || modality =="ESTATE"){
+              modality = "ESTATE";
+            }
+		
 
             switch (command) {
               case "PROGRAMMA":
