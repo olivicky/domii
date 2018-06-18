@@ -186,11 +186,11 @@ module.exports = function(controller) {
             if(command === "M" || command === "1" || command === "MANUALE"){
               command = "MANUALE";
             }
-            else if(command === "A" || command === "2" || command === "ACCESO"){
-              command = "PROTEZIONE";
+            else if(command === "A" || command === "2" || command === "ACCENDI"){
+              command = "ACCENDI";
 	    }
-            else if(command === "S" || command === "3" || command === "SPENTO"){
-              command = "SPENTO";
+            else if(command === "S" || command === "3" || command === "SPEGNI"){
+              command = "SPEGNI";
             }
         // can call convo.gotoThread() to change direction of conversation
         convo.setVar('comando_presa', command);
@@ -663,19 +663,19 @@ module.exports = function(controller) {
 		if(command === "M" || command === "1" || command === "MANUALE"){
               command = "MANUALE";
             }
-            else if(command === "A" || command === "2" || command === "ACCESO"){
-              command = "PROTEZIONE";
+            else if(command === "A" || command === "2" || command === "ACCENDI"){
+              command = "ACCENDI";
 	    }
-            else if(command === "S" || command === "3" || command === "SPENTO"){
-              command = "SPENTO";
+            else if(command === "S" || command === "3" || command === "SPEGNI"){
+              command = "SPEGNI";
             }
 		
 		
 	switch (command) {
-              case "ACCESO":
+              case "ACCENDI":
                   modalita = "9";
                   break;
-              case "SPENTO":
+              case "SPEGNI":
                   modalita = "2";
                   break;
               case "MANUALE":
