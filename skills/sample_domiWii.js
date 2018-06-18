@@ -128,6 +128,22 @@ module.exports = function(controller) {
         next();
 
     });
+	
+	// Validate user input: timer_on_presa
+    controller.studio.validate('domiWii','timer_on_presa', function(convo, next) {
+
+        var value = convo.extractResponse('timer_on_presa');
+
+        // test or validate value somehow
+        // can call convo.gotoThread() to change direction of conversation
+        convo.setVar('timer_on_presa',value);
+      
+        console.log('VALIDATE: domiWii VARIABLE: timer_on_presa');
+
+        // always call next!
+        next();
+
+    });
 
     // Validate user input: timer_on
     controller.studio.validate('domiWii','timer_on', function(convo, next) {
@@ -160,6 +176,32 @@ module.exports = function(controller) {
         next();
 
     });
+	
+	// Validate user input: comando_presa
+    controller.studio.validate('domiWii','comando_presa', function(convo, next) {
+
+        var value = convo.extractResponse('comando_presa');
+        var command = value.toUpperCase();
+
+            if(command === "M" || command === "1" || command === "MANUALE"){
+              command = "MANUALE";
+            }
+            else if(command === "A" || command === "2" || command === "ACCESO"){
+              command = "PROTEZIONE";
+	    }
+            else if(command === "S" || command === "3" || command === "SPENTO"){
+              command = "SPENTO";
+            }
+        // can call convo.gotoThread() to change direction of conversation
+        convo.setVar('comando_presa', command);
+
+        console.log('VALIDATE: domiWii VARIABLE: comando_presa');
+
+        // always call next!
+        next();
+
+    });
+	
 
     // Validate user input: comando_termostato
     controller.studio.validate('domiWii','comando_termostato', function(convo, next) {
@@ -299,7 +341,20 @@ module.exports = function(controller) {
                                 convo.gotoThread('info_temperatura_termostato');
                             }
                             //convo.gotoThread('scelta_comando_termostato');
-                          } else {
+                          } else if(response.uiid.startsWith("3")){
+				    console.log("Entrato nell'if di dispositivo Presa");
+				    convo.setVar('dispositivo','Presa');
+				    var potenza_attiva;
+				    var potenza_reattiva;
+				    potenza_reattiva = parseInt(response.power_reactive_measured);
+				    potenza_attiva = parseInt(response.power_active_measured);
+				    if(potenza_reattiva > 0 || potenza_attiva > 0){
+					convo.setVar('potenza_reattiva',potenza_reattiva);
+					convo.setVar('potenza_attiva', potenza_attiva);
+					convo.gotoThread('info_presa');
+				    }
+
+			   } else {
                             //askOperation(response, convo);
                             //convo.next();
 							convo.gotoThread('bad_device');
@@ -499,7 +554,7 @@ module.exports = function(controller) {
             console.log("command variable: "+ command);
             console.log("modality variable: "+ modality)
 		
-		if(command === "M" || command === "1" || command === "MANUALE"){
+	if(command === "M" || command === "1" || command === "MANUALE"){
               command = "MANUALE";
             }
             else if(command === "P" || command === "3" || command === "PROTEZIONE"){
@@ -595,8 +650,88 @@ module.exports = function(controller) {
                       }
                   });
                 
-        }
-        else{
+        } else if(device == "Presa"){
+		console.log("Si sta per inviare un comando per una Presa");
+          	var command = convo.extractResponse('comando_presa');
+            command = command.toUpperCase();
+            var timer = convo.extractResponse('timer_on_presa');
+            var modalita;
+ 
+            console.log("command variable: "+ command);
+            console.log("modality variable: "+ modality)
+		
+		if(command === "M" || command === "1" || command === "MANUALE"){
+              command = "MANUALE";
+            }
+            else if(command === "A" || command === "2" || command === "ACCESO"){
+              command = "PROTEZIONE";
+	    }
+            else if(command === "S" || command === "3" || command === "SPENTO"){
+              command = "SPENTO";
+            }
+		
+		
+	switch (command) {
+              case "ACCESO":
+                  modalita = "9";
+                  break;
+              case "SPENTO":
+                  modalita = "2";
+                  break;
+              case "MANUALE":
+                  modalita = "10";
+                  break;
+                default:
+                    modalita = "1";
+              
+            }	
+		
+	  var object = {};
+          
+          object.alias = alias;
+          object.password = password;
+          object.command = modalita;
+          object.uiid = uiid;
+          (timer)? object.timeOn = timer : null;
+
+                  var data = JSON.stringify(object);
+
+                  console.log(data);
+
+                  var options = {
+                      url: 'https://domiwiiprj.herokuapp.com' + '/addAction',
+
+                      headers: {
+                          'Content-Type': 'application/json; charset=utf-8',
+                          'Content-Length': data.length
+                      },
+                      body: data
+                  }
+
+          
+                  var richiesta = rich.post(options, function(error, response, body) {
+                      if (!error && response.statusCode == 200) {
+                          console.log(body)
+                          var response = JSON.parse(body); 
+                      if(response.response == "true"){ 
+                          console.log("Entrato nell'if perchè la risposta è true");
+                            convo.gotoThread('done');
+                            next();
+                          }
+                          else{
+                            console.log("Entrato nell'else perchè la risposta è false");
+                            convo.gotoThread('bad_done');
+                            next();
+                          }
+                      } else {
+
+                          convo.gotoThread('bad_done');
+                            next();
+                      }
+                  });
+		
+		
+	}else{
           convo.gotoThread('no_done');
           // always call next!
           next();    
