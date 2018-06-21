@@ -192,6 +192,9 @@ module.exports = function(controller) {
             else if(command === "S" || command === "3" || command === "SPEGNI"){
               command = "SPEGNI";
             }
+	    else if(command === "P" || command === "4" || command === "PROGRAMMA"){
+              command = "PROGRAMMA";
+            }
         // can call convo.gotoThread() to change direction of conversation
         convo.setVar('comando_presa', command);
 
@@ -341,7 +344,7 @@ module.exports = function(controller) {
                                 convo.gotoThread('info_temperatura_termostato');
                             }
                             //convo.gotoThread('scelta_comando_termostato');
-                          } else if(response.uiid.startsWith("3")){
+                          } else if(response.uiid.startsWith("3") || response.uiid.startsWith("4")){
 				    console.log("Entrato nell'if di dispositivo Presa");
 				    convo.setVar('dispositivo','Presa');
 				    var potenza_attiva;
@@ -650,7 +653,9 @@ module.exports = function(controller) {
                       }
                   });
                 
-        } else if(device == "Presa"){
+        }
+	// PRESA
+	else if(device == "Presa"){
 		console.log("Si sta per inviare un comando per una Presa");
           	var command = convo.extractResponse('comando_presa');
             command = command.toUpperCase();
@@ -668,6 +673,9 @@ module.exports = function(controller) {
 	    }
             else if(command === "S" || command === "3" || command === "SPEGNI"){
               command = "SPEGNI";
+            } 
+		else if(command === "P" || command === "4" || command === "PROGRAMMA"){
+              command = "PROGRAMMA";
             }
 		
 		
@@ -680,6 +688,9 @@ module.exports = function(controller) {
                   break;
               case "MANUALE":
                   modalita = "10";
+                  break;
+	      case "PROGRAMMA":
+                  modalita = "3";
                   break;
                 default:
                     modalita = "1";
