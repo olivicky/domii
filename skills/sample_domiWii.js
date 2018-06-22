@@ -349,13 +349,17 @@ module.exports = function(controller) {
 				    convo.setVar('dispositivo','Presa');
 				    var potenza_attiva;
 				    var potenza_reattiva;
+				    var isRunningPlug; 
 				    potenza_reattiva = parseInt(response.power_reactive_measured);
 				    potenza_attiva = parseInt(response.power_active_measured);
-				    if(potenza_reattiva > 0 || potenza_attiva > 0){
+				  isRunningPlug = response.is_running;
+				    if(potenza_reattiva > 0 || potenza_attiva > 0 || isRunningPlug){
 					convo.setVar('potenza_reattiva',potenza_reattiva);
 					convo.setVar('potenza_attiva', potenza_attiva);
+					convo.setVar('isRunningPlug', isRunningPlug);
 					convo.gotoThread('info_presa');
 				    }
+				  
 
 			   } else {
                             //askOperation(response, convo);
