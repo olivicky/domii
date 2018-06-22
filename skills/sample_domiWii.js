@@ -183,14 +183,14 @@ module.exports = function(controller) {
         var value = convo.extractResponse('comando_presa');
         var command = value.toUpperCase();
 
-            if(command === "M" || command === "1" || command === "MANUALE"){
-              command = "MANUALE";
+            if(command === "T" || command === "3" || command === "TIMER"){
+              command = "TIMER";
             }
-            else if(command === "A" || command === "2" || command === "ACCENDI"){
-              command = "ACCENDI";
+            else if(command === "A" || command === "1" || command === "ACCESO"){
+              command = "ACCESO";
 	    }
-            else if(command === "S" || command === "3" || command === "SPEGNI"){
-              command = "SPEGNI";
+            else if(command === "S" || command === "2" || command === "SPENTO"){
+              command = "SPENTO";
             }
 	    else if(command === "P" || command === "4" || command === "PROGRAMMA"){
               command = "PROGRAMMA";
@@ -669,28 +669,28 @@ module.exports = function(controller) {
             console.log("command variable: "+ command);
             console.log("modality variable: "+ modality)
 		
-		if(command === "M" || command === "1" || command === "MANUALE"){
-              command = "MANUALE";
+		if(command === "T" || command === "3" || command === "TIMER"){
+              command = "TIMER";
             }
-            else if(command === "A" || command === "2" || command === "ACCENDI"){
-              command = "ACCENDI";
+            else if(command === "A" || command === "1" || command === "ACCESO"){
+              command = "ACCESO";
 	    }
-            else if(command === "S" || command === "3" || command === "SPEGNI"){
-              command = "SPEGNI";
-            } 
-		else if(command === "P" || command === "4" || command === "PROGRAMMA"){
+            else if(command === "S" || command === "2" || command === "SPENTO"){
+              command = "SPENTO";
+            }
+	    else if(command === "P" || command === "4" || command === "PROGRAMMA"){
               command = "PROGRAMMA";
             }
 		
 		
 	switch (command) {
-              case "ACCENDI":
+              case "ACCESO":
                   modalita = "9";
                   break;
-              case "SPEGNI":
+              case "SPENTO":
                   modalita = "2";
                   break;
-              case "MANUALE":
+              case "TIMER":
                   modalita = "10";
                   break;
 	      case "PROGRAMMA":
