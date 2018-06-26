@@ -183,18 +183,18 @@ module.exports = function(controller) {
         var value = convo.extractResponse('comando_presa');
         var command = value.toUpperCase();
 
-//             if(command === "T" || command === "3" || command === "TIMER"){
-//               command = "TIMER";
-//             }
-//             else if(command === "A" || command === "1" || command === "ACCESO"){
-//               command = "ACCESO";
-// 	    }
-//             else if(command === "S" || command === "2" || command === "SPENTO"){
-//               command = "SPENTO";
-//             }
-// 	    else if(command === "P" || command === "4" || command === "PROGRAMMA"){
-//               command = "PROGRAMMA";
-//             }
+            if(command === "T" || command === "3" || command === "TIMER"){
+              command = "TIMER";
+            }
+            else if(command === "A" || command === "1" || command === "ACCESO"){
+              command = "ACCESO";
+	    }
+            else if(command === "S" || command === "2" || command === "SPENTO"){
+              command = "SPENTO";
+            }
+	    else if(command === "P" || command === "4" || command === "PROGRAMMA"){
+              command = "PROGRAMMA";
+            }
         // can call convo.gotoThread() to change direction of conversation
         convo.setVar('comando_presa', command);
 
