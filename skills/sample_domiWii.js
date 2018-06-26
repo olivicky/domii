@@ -199,6 +199,7 @@ module.exports = function(controller) {
         convo.setVar('comando_presa', command);
 
         console.log('VALIDATE: domiWii VARIABLE: comando_presa');
+	    console.log("Entrato nel validatore comando presa");
 
         // always call next!
         next();
