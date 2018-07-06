@@ -406,7 +406,7 @@ module.exports = function(controller) {
 
         var rispostainviocomando = convo.extractResponse('rispostainviocomando');
         
-        if(rispostainviocomando == 'send_command'){
+        if(rispostainviocomando == 'si'){
         
           
           var password = convo.extractResponse('password');
