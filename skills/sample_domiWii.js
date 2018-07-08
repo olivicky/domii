@@ -276,7 +276,7 @@ module.exports = function(controller) {
                 console.log(data);
         
                 var options = {
-                    url: 'https://domiwiiprj.herokuapp.com' + '/checkDevice',
+                    url: 'https://domiwiiapp.herokuapp.com' + '/checkDevice',
         
                     headers: {
                         'Content-Type': 'application/json; charset=utf-8',
@@ -509,7 +509,7 @@ module.exports = function(controller) {
                   console.log(data);
 
                   var options = {
-                      url: 'https://domiwiiprj.herokuapp.com' + '/addBotAction',
+                      url: 'https://domiwiiapp.herokuapp.com' + '/addBotAction',
 
                       headers: {
                           'Content-Type': 'application/json; charset=utf-8',
@@ -630,7 +630,7 @@ module.exports = function(controller) {
                   console.log(data);
 
                   var options = {
-                      url: 'https://domiwiiprj.herokuapp.com' + '/addAction',
+                      url: 'https://domiwiiapp.herokuapp.com' + '/addAction',
 
                       headers: {
                           'Content-Type': 'application/json; charset=utf-8',
@@ -718,7 +718,7 @@ module.exports = function(controller) {
                   console.log(data);
 
                   var options = {
-                      url: 'https://domiwiiprj.herokuapp.com' + '/addAction',
+                      url: 'https://domiwiiapp.herokuapp.com' + '/addAction',
 
                       headers: {
                           'Content-Type': 'application/json; charset=utf-8',
